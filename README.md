@@ -24,9 +24,28 @@ Pull Request for this file with a description and a solution.
 If it is not working like expected, have a look on the docker container
 logs during setup.
 
+### enable XDebug in Jetbrains PHP-Storm
+
+1. set the environment variables `XDEBUG_SESSION` 
+  and `DEBUG_SERVER_NAME` in your `.envrc`. 
+  Activate the variables via `direnv allow`.
+2. IDE Settings
+  - Settings -> PHP -> Xdebug -> Debug Port = add Port 9003 if not set
+  - Settings -> PHP -> Servers = Add a new Server
+    - the Server Name must be identical to the `DEBUG_SERVER_NAME` env variable
+    - the host name should be the container name (`php`)
+    - the host must be the exposed web port (i.e. `80`)
+    - activate path mappings. In the sample you must set the local `./sample` 
+      folder to the mapping `/var/www`
+
+(you can find a screenshot for the server settings in the sample folder)
+
+![Link to the Screenshot](sample/ide_server_settings.png)
+
 ### Copyright
 
-All files in the project folder are part are under copyright 2024 by Maik Tizziani (mtizziani@gmail.com).
+All files in the project folder are part are under copyright 2024 
+by Maik Tizziani (mtizziani@gmail.com).
 
 ### Licence
 

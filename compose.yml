@@ -26,8 +26,14 @@ services:
       dockerfile: ./docker/build/php/8.3-fpm/Dockerfile
     volumes:
       - ./sample:/var/www
+      - ./docker/config/php/90_xdebug.ini:/usr/local/etc/php/conf.d/90_xdebug.ini
     networks:
       - internal
+    expose:
+      - :9003
+    environment:
+      XDEBUG_SESSION: "${XDEBUG_SESSION}"
+      PHP_IDE_CONFIG: "serverName=${DEBUG_SERVER_NAME}"
     restart: unless-stopped
     extra_hosts:
       host.docker.internal: host-gateway

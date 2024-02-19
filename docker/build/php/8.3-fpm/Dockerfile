@@ -7,4 +7,7 @@ FROM php:8.3-fpm
 RUN apt-get update
 RUN apt-get upgrade -y
 
+RUN pecl install xdebug
+RUN docker-php-ext-enable xdebug
+
 WORKDIR /var/www
