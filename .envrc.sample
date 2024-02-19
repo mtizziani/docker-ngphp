@@ -1,0 +1,10 @@
+## License and Copyright
+### This file is port of the "ngphp" project, copyright 2024 by Maik Tizziani
+### The project is published under let LGPL3 License
+
+export EXTERNAL_HTTP_PORT=80
+# export EXTERNAL_HTTPS_PORT=443
+
+# get you docker group id over `getent group docker`.
+# Result should be docker:x:GID:USER
+export DOCKER_GROUP_ID=957

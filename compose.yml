@@ -1,0 +1,36 @@
+services:
+
+  web:
+    image: nginx:1.25.4
+    volumes:
+      - ./sample:/var/www
+      - ./docker/config/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - internal
+    ports:
+      - ${EXTERNAL_HTTP_PORT}:80
+    restart: unless-stopped
+    extra_hosts:
+      host.docker.internal: host-gateway
+    user: root:${DOCKER_GROUP_ID}
+    depends_on:
+      php:
+        condition: service_started
+
+  php:
+    build:
+      dockerfile: ./docker/build/php/8.3-fpm/Dockerfile
+    volumes:
+      - ./sample:/var/www
+    networks:
+      - internal
+    restart: unless-stopped
+    extra_hosts:
+      host.docker.internal: host-gateway
+    user: root:${DOCKER_GROUP_ID}
+
+
+networks:
+  internal:
+    name: ngphp-base-network
+    external: false
